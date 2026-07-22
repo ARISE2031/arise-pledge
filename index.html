@@ -3,886 +3,1319 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>ARISE | Advancing NextGen Church</title>
+<title>ARISE | Advancing NextGen Church</title>
 
-    <link rel="icon" href="assets/favicon.png">
+<link rel="icon" href="assets/favicon.png">
 
-    <!-- Tailwind -->
-    <script src="https://cdn.tailwindcss.com"></script>
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+<style>
 
-    <!-- =======================================================
-        CUSTOM STYLES
-    ======================================================== -->
+html{
+scroll-behavior:smooth;
+}
 
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
+body{
 
-        body {
-            font-family: "Poppins", sans-serif;
-            background: #0f0f0f;
-            overflow-x: hidden;
-        }
+font-family:'Poppins',sans-serif;
 
-        .title {
-            font-family: "Cinzel", serif;
-        }
+background:#0f0f0f;
 
-        /* HERO BACKGROUND */
+overflow-x:hidden;
 
-        .hero {
+color:white;
 
-            background:
-                linear-gradient(rgba(0, 0, 0, .78),
-                    rgba(0, 0, 0, .80)),
-                url("assets/background.jpg");
+}
 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+.title{
 
-        /* GOLD GLOW */
+font-family:'Cinzel',serif;
 
-        .gold {
+}
 
-            color: #D4AF37;
+.hero{
 
-            text-shadow:
-                0 0 10px rgba(212, 175, 55, .35),
-                0 0 30px rgba(212, 175, 55, .15);
+background:
 
-        }
+linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.85)),
 
-        /* CARD */
+url("assets/background.jpg");
 
-        .glass {
+background-size:cover;
 
-            background: rgba(255, 255, 255, .05);
+background-position:center;
 
-            backdrop-filter: blur(12px);
+background-repeat:no-repeat;
 
-            border: 1px solid rgba(255, 255, 255, .08);
+}
 
-        }
+.gold{
 
-        /* BUTTON */
+color:#D4AF37;
 
-        .btn-gold {
+text-shadow:
 
-            background: linear-gradient(135deg,
-                    #EACB62,
-                    #C59A24);
+0 0 10px rgba(212,175,55,.35),
 
-            color: black;
+0 0 30px rgba(212,175,55,.20);
 
-            font-weight: bold;
+}
 
-            transition: .35s;
+.glass{
 
-            box-shadow:
-                0 10px 30px rgba(212, 175, 55, .30);
+background:rgba(255,255,255,.06);
 
-        }
+backdrop-filter:blur(15px);
 
-        .btn-gold:hover {
+border:1px solid rgba(255,255,255,.08);
 
-            transform: translateY(-3px);
+box-shadow:
 
-            box-shadow:
-                0 18px 45px rgba(212, 175, 55, .45);
+0 15px 40px rgba(0,0,0,.35);
 
-        }
+transition:.35s;
 
-        /* INPUT */
+}
 
-        .input-box {
+.glass:hover{
 
-            background: rgba(255, 255, 255, .90);
+transform:translateY(-4px);
 
-            transition: .3s;
+box-shadow:
 
-        }
+0 20px 50px rgba(212,175,55,.18);
 
-        .input-box:focus {
+}
 
-            outline: none;
+.btn-gold{
 
-            box-shadow:
-                0 0 0 4px rgba(212, 175, 55, .35);
+background:
 
-        }
+linear-gradient(135deg,#F3D56B,#C6971C);
 
-        /* FADE ANIMATION */
+color:#000;
 
-        @keyframes fadeUp {
+font-weight:bold;
 
-            from {
+transition:.35s;
 
-                opacity: 0;
+box-shadow:
 
-                transform: translateY(30px);
+0 12px 35px rgba(212,175,55,.35);
 
-            }
+}
 
-            to {
+.btn-gold:hover{
 
-                opacity: 1;
+transform:translateY(-3px);
 
-                transform: translateY(0);
+box-shadow:
 
-            }
+0 18px 45px rgba(212,175,55,.45);
 
-        }
+}
 
-        .fade-up {
+.input-box{
 
-            animation: fadeUp 1s ease forwards;
+background:white;
 
-        }
+transition:.3s;
 
-        /* FLOATING PARTICLES */
+}
 
-        .particle {
+.input-box:focus{
 
-            position: absolute;
+outline:none;
 
-            border-radius: 50%;
+box-shadow:
 
-            background: #D4AF37;
+0 0 0 4px rgba(212,175,55,.30);
 
-            opacity: .4;
+}
 
-            animation: float linear infinite;
+.stat-card{
 
-        }
+padding:30px;
 
-        @keyframes float {
+border-radius:24px;
 
-            from {
+text-align:center;
 
-                transform: translateY(100vh);
+}
 
-            }
+.stat-value{
 
-            to {
+font-size:2.3rem;
 
-                transform: translateY(-120vh);
+font-weight:bold;
 
-            }
+margin-top:8px;
 
-        }
+}
 
-        /* LOADING SPINNER */
+.stat-label{
 
-        .spinner {
+color:#bdbdbd;
 
-            border: 4px solid rgba(255, 255, 255, .2);
+margin-top:10px;
 
-            border-top: 4px solid #D4AF37;
+font-size:.95rem;
 
-            border-radius: 50%;
+}
 
-            width: 55px;
+.progress-bg{
 
-            height: 55px;
+height:18px;
 
-            animation: spin 1s linear infinite;
+background:#2f2f2f;
 
-        }
+border-radius:999px;
 
-        @keyframes spin {
+overflow:hidden;
 
-            to {
+}
 
-                transform: rotate(360deg);
+.progress-fill{
 
-            }
+height:100%;
 
-        }
-    </style>
+width:0%;
+
+background:
+
+linear-gradient(90deg,#FFD65A,#D4AF37);
+
+transition:width 1.5s ease;
+
+}
+
+@keyframes fadeUp{
+
+from{
+
+opacity:0;
+
+transform:translateY(35px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+.fade-up{
+
+animation:fadeUp 1s ease forwards;
+
+}
+
+@keyframes pulseGold{
+
+0%{
+
+box-shadow:0 0 0 rgba(212,175,55,.1);
+
+}
+
+50%{
+
+box-shadow:0 0 30px rgba(212,175,55,.30);
+
+}
+
+100%{
+
+box-shadow:0 0 0 rgba(212,175,55,.1);
+
+}
+
+}
+
+.live-card{
+
+animation:pulseGold 4s infinite;
+
+}
+
+.particle{
+
+position:absolute;
+
+border-radius:50%;
+
+background:#D4AF37;
+
+opacity:.35;
+
+animation:float linear infinite;
+
+}
+
+@keyframes float{
+
+from{
+
+transform:translateY(100vh);
+
+}
+
+to{
+
+transform:translateY(-120vh);
+
+}
+
+}
+
+.spinner{
+
+border:4px solid rgba(255,255,255,.15);
+
+border-top:4px solid #D4AF37;
+
+width:55px;
+
+height:55px;
+
+border-radius:50%;
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+.modal{
+
+animation:fadeUp .35s ease;
+
+}
+
+</style>
 
 </head>
 
-<body class="text-white">
+<body>
 
-    <!-- ==========================================
-        GOLD PARTICLES
-    =========================================== -->
+<div id="particles"></div>
 
-    <div id="particles"></div>
+<section
+id="home"
+class="hero relative min-h-screen flex flex-col justify-between">
 
-    <!-- ==========================================
-        HOME SECTION
-    =========================================== -->
+<nav class="max-w-7xl mx-auto w-full px-8 py-7 flex justify-end">
 
-    <section id="home"
-        class="hero relative min-h-screen flex flex-col justify-between">
+<div class="flex gap-5">
 
-        <!-- =============================
-            NAVIGATION
-        ============================== -->
+<a
+href="javascript:void(0)"
+onclick="openAbout()"
+class="hover:text-yellow-400 duration-300">
 
-        <nav class="max-w-7xl mx-auto w-full px-8 py-7 flex justify-end">
+About ARISE
 
-            <div class="flex gap-5">
+</a>
 
-                <a href="#"
-                    class="hover:text-yellow-400 duration-300">
+<a
+href="javascript:void(0)"
+onclick="openHelp()"
+class="border border-yellow-500 px-5 py-2 rounded-full hover:bg-yellow-500 hover:text-black duration-300">
 
-                    About ARISE
+Need Help
 
-                </a>
+</a>
 
-                <a href="#"
-                    class="border border-yellow-500 px-5 py-2 rounded-full hover:bg-yellow-500 hover:text-black duration-300">
+</div>
 
-                    Need Help
+</nav>
 
-                </a>
+<div class="flex-1 flex justify-center items-center">
 
-            </div>
+<div class="text-center max-w-4xl px-6 fade-up">
 
-        </nav>
+<img
+src="assets/logo.png"
+class="mx-auto w-60 md:w-72 mb-8">
 
-        <!-- =============================
-            HERO CONTENT
-        ============================== -->
+<p class="title uppercase tracking-[.35em] text-lg md:text-2xl">
 
-        <div class="flex-1 flex justify-center items-center">
+Advancing the Resolved Initiative
 
-            <div class="text-center max-w-4xl px-6 fade-up">
+<br>
 
-                <!-- Logo -->
+To Secure and Expand
 
-                <img src="assets/logo.png"
-                    class="mx-auto w-60 md:w-72 mb-8"
-                    alt="ARISE">
+</p>
 
-                <!-- Campaign -->
+<h1 class="title gold text-5xl md:text-7xl tracking-[.40em] my-8">
 
-                <p class="title uppercase tracking-[.35em] text-lg md:text-2xl">
+OUR LEGACY
 
-                    Advancing the Resolved Initiative
+</h1>
 
-                    <br>
+<p class="text-gray-300 text-lg md:text-xl leading-9 max-w-3xl mx-auto">
 
-                    To Secure and Expand
+Building a legacy of faith for the next generation through joyful generosity.
 
-                </p>
+</p>
 
-                <!-- Legacy -->
+<div class="glass rounded-3xl mt-14 p-8 max-w-xl mx-auto">
 
-                <h1 class="title gold text-5xl md:text-7xl tracking-[.40em] my-8">
+<h2 class="text-xl mb-5 font-semibold">
 
-                    OUR LEGACY
+Enter your ARISE Code
 
-                </h1>
+</h2>
 
-                <!-- Tagline -->
+<input
 
-                <p class="text-gray-300 text-lg md:text-xl leading-9 max-w-3xl mx-auto">
+id="ariseCode"
 
-                    Building a legacy of faith for the next generation through joyful generosity.
+type="text"
 
-                </p>
+placeholder="e.g. ARISE-2026-0001"
 
-                <!-- SEARCH CARD -->
+class="input-box w-full rounded-full h-16 px-8 text-center text-black text-lg">
 
-                <div class="glass rounded-3xl mt-14 p-8 max-w-xl mx-auto">
+<button
 
-                    <h2 class="text-xl mb-5 font-semibold">
+onclick="searchMember()"
 
-                        Enter your ARISE Code
+class="btn-gold w-full rounded-full py-4 mt-6">
 
-                    </h2>
+VIEW MY CONTRIBUTIONS
 
-                    <input
+</button>
 
-                        id="ariseCode"
+<p class="mt-5 text-gray-400 text-sm">
 
-                        type="text"
+🔒 Your information is safe and secure.
 
-                        placeholder="e.g. ARISE-2026-0000"
+</p>
 
-                        class="input-box w-full rounded-full h-16 px-8 text-center text-black text-lg">
+</div>
 
-                    <button
+<!-- ======================================
+LIVE CAMPAIGN PROGRESS
+====================================== -->
 
-                        onclick="searchMember()"
+<div class="mt-20">
 
-                        class="btn-gold w-full rounded-full py-4 mt-6">
+<h2 class="title text-4xl gold mb-10">
 
-                        VIEW MY CONTRIBUTIONS
+ARISE Campaign Progress
 
-                    </button>
+</h2>
 
-                    <p class="mt-5 text-gray-400 text-sm">
+<div class="grid md:grid-cols-3 gap-6">
 
-                        🔒 Your information is safe and secure.
+<div class="glass stat-card live-card">
 
-                    </p>
+<div class="text-5xl">
 
-                </div>
+💰
 
-            </div>
+</div>
 
-        </div>
+<div
+id="campaignPledged"
+class="stat-value gold">
 
-        <!-- =============================
-            CHURCH OUTLINE
-        ============================== -->
+₱0
 
-        <div class="mt-12">
+</div>
 
-            <img src="assets/church-outline.png"
+<div class="stat-label">
 
-                class="w-full max-w-6xl mx-auto opacity-90"
+Total Pledged
 
-                alt="Church Outline">
+</div>
 
-        </div>
+</div>
 
-        <!-- =============================
-            FOOTER
-        ============================== -->
+<div class="glass stat-card live-card">
 
-        <footer class="text-center py-8">
+<div class="text-5xl">
 
-            <p class="text-gray-400">
+👥
 
-                Powered by
+</div>
 
-            </p>
+<div
+id="campaignMembers"
+class="stat-value">
 
-            <p class="font-semibold">
+0
 
-                COG Dabubu Grande
+</div>
 
-            </p>
+<div class="stat-label">
 
-            <p class="text-sm text-gray-500 mt-3">
+Families Committed
 
-                © 2026 ARISE: Advancing NextGen Church
+</div>
 
-            </p>
+</div>
 
-        </footer>
+<div class="glass stat-card live-card">
 
-    </section>
+<div class="text-5xl">
 
-    <!-- ==========================================
-        LOADING OVERLAY
-    =========================================== -->
+🎯
 
-    <div id="loading"
+</div>
 
-        class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex flex-col justify-center items-center z-50">
+<div
+id="campaignGoal"
+class="stat-value text-yellow-400">
 
-        <div class="spinner"></div>
+₱0
 
-        <p class="mt-6 text-xl">
+</div>
 
-            Retrieving your pledge...
+<div class="stat-label">
+
+Campaign Goal
+
+</div>
+
+</div>
+
+</div>
+
+<div class="glass rounded-3xl mt-8 p-8">
+
+<div class="flex justify-between mb-4">
+
+<span>
+
+Campaign Progress
+
+</span>
+
+<span
+id="campaignProgressText"
+class="gold font-bold">
+
+0%
+
+</span>
+
+</div>
+
+<div class="progress-bg">
+
+<div
+id="campaignProgressBar"
+class="progress-fill">
+
+</div>
+
+</div>
+
+<p class="text-gray-400 mt-5">
+
+Every pledge helps build a legacy of faith for the next generation.
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="mt-12">
+
+<img
+
+src="assets/church-outline.png"
+
+class="w-full max-w-6xl mx-auto opacity-90">
+
+</div>
+
+<footer class="text-center py-8">
+
+<p class="text-gray-400">
+
+Powered by
+
+</p>
+
+<p class="font-semibold">
+
+COG Dabubu Grande
+
+</p>
+
+<p class="text-sm text-gray-500 mt-3">
+
+© 2026 ARISE: Advancing NextGen Church
+
+</p>
+
+</footer>
+
+</section>
+<!-- ==========================================
+ABOUT ARISE MODAL
+========================================== -->
+
+<div id="aboutModal"
+class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+onclick="if(event.target===this)closeAbout()">
+
+<div class="glass modal max-w-2xl w-full rounded-3xl p-10">
+
+<button
+onclick="closeAbout()"
+class="float-right text-3xl hover:text-yellow-400">
+
+&times;
+
+</button>
+
+<h2 class="title text-4xl gold mb-8">
+
+About ARISE
+
+</h2>
+
+<p class="text-gray-300 leading-8">
+
+<strong>ARISE</strong> stands for
+
+<strong>
+
+Advancing the Resolved Initiative to Secure and Expand
+
+</strong>.
+
+</p>
+
+<p class="text-gray-400 leading-8 mt-6">
+
+This five-year campaign is our church family's commitment to build a legacy of faith through joyful generosity.
+
+</p>
+
+<p class="text-gray-400 leading-8 mt-6">
+
+Every pledge strengthens the future of our church and supports the next generation of believers.
+
+</p>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+HELP MODAL
+========================================== -->
+
+<div id="helpModal"
+class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6"
+onclick="if(event.target===this)closeHelp()">
+
+<div class="glass modal max-w-2xl w-full rounded-3xl p-10">
+
+<button
+onclick="closeHelp()"
+class="float-right text-3xl hover:text-yellow-400">
+
+&times;
+
+</button>
+
+<h2 class="title text-4xl gold mb-8">
+
+Need Help?
+
+</h2>
+
+<p class="text-gray-300 leading-8">
+
+If you cannot access your pledge information or forgot your ARISE Code, kindly contact the church office.
+
+</p>
+
+<div class="mt-8">
+
+<div class="glass rounded-2xl p-5">
+
+<p class="font-semibold gold">
+
+Office Hours
+
+</p>
+
+<p class="text-gray-300 mt-2">
+
+Monday – Friday
+
+<br>
+
+8:00 AM – 5:00 PM
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+MEMBER NOT FOUND MODAL
+========================================== -->
+
+<div id="errorModal"
+class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
+
+<div class="glass modal max-w-md w-full rounded-3xl p-8 text-center">
+
+<div class="text-6xl mb-5">
+
+⚠️
+
+</div>
+
+<h2 class="title text-3xl gold mb-4">
+
+Member Not Found
+
+</h2>
+
+<p class="text-gray-300 leading-8">
+
+We couldn't find an ARISE Code matching your entry.
+
+Please verify the code or contact the church office.
+
+</p>
+
+<button
+onclick="closeError()"
+class="btn-gold w-full rounded-full py-4 mt-8">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+<!-- ==========================================
+PREMIUM LOADING
+========================================== -->
+
+<div id="loading"
+class="hidden fixed inset-0 bg-black/90 backdrop-blur-sm flex flex-col justify-center items-center z-50">
+
+<div class="spinner"></div>
+
+<h2 class="title text-3xl gold mt-8">
+
+Preparing Your Pledge...
+
+</h2>
+
+<p class="text-gray-400 mt-3">
+
+Please wait while we retrieve your contribution records.
+
+</p>
+
+</div>
+
+<!-- ==========================================
+MEMBER DASHBOARD
+========================================== -->
+
+<section
+id="dashboard"
+class="hidden min-h-screen bg-[#0f0f0f] px-6 py-12">
+
+<div class="max-w-7xl mx-auto">
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+
+<button
+
+onclick="showHome()"
+
+class="border border-yellow-500 text-yellow-400 px-5 py-2 rounded-full hover:bg-yellow-500 hover:text-black transition">
+
+← Back to Home
+
+</button>
+
+<div class="text-center md:text-right">
+
+<h1
+id="memberName"
+class="title text-4xl md:text-5xl gold">
+
+Member Name
+
+</h1>
+
+<p
+id="memberCode"
+class="text-gray-400 mt-2">
+
+ARISE-000000
+
+</p>
+
+</div>
+
+</div>
+
+<div class="grid lg:grid-cols-3 gap-6">
+
+<div class="glass rounded-3xl p-8">
+
+<p class="text-gray-400 mb-2">
+
+Total Pledge
+
+</p>
+
+<h2
+id="totalPledge"
+class="text-4xl font-bold gold">
+
+₱0
+
+</h2>
+
+</div>
+
+<div class="glass rounded-3xl p-8">
+
+<p class="text-gray-400 mb-2">
+
+Total Contributions
+
+</p>
+
+<h2
+id="totalContribution"
+class="text-4xl font-bold text-green-400">
+
+₱0
+
+</h2>
+
+</div>
+
+<div class="glass rounded-3xl p-8">
+
+<p class="text-gray-400 mb-2">
+
+Remaining Balance
+
+</p>
+
+<h2
+id="remainingBalance"
+class="text-4xl font-bold text-red-400">
+
+₱0
+
+</h2>
+
+</div>
+
+</div>
+
+<div class="glass rounded-3xl p-8 mt-8">
+
+<div class="flex justify-between mb-4">
+
+<span>
+
+Pledge Progress
+
+</span>
+
+<span
+id="progressPercent"
+class="gold font-bold">
+
+0%
+
+</span>
+
+</div>
+
+<div class="progress-bg">
+
+<div
+id="progressBar"
+class="progress-fill">
+
+</div>
+
+</div>
+
+</div>
+<!-- ==========================================
+CONTRIBUTION HISTORY
+========================================== -->
+
+<div class="glass rounded-3xl p-8 mt-8">
+
+    <div class="flex justify-between items-center mb-6">
+
+        <h2 class="title text-3xl gold">
+
+            Contribution History
+
+        </h2>
+
+        <p class="text-sm text-gray-400">
+
+            Last Updated:
+            <span id="lastUpdated">--</span>
 
         </p>
 
     </div>
 
-    <!-- ==========================================
-        MEMBER DASHBOARD
-        Hidden by default
-    =========================================== -->
+    <div class="overflow-x-auto">
 
-    <section id="dashboard"
-        class="hidden min-h-screen bg-[#0f0f0f] px-6 py-12">
+        <table class="w-full text-left">
 
-        <div class="max-w-7xl mx-auto">
+            <thead>
 
-            <!-- Header -->
+                <tr class="border-b border-gray-700">
 
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-10">
+                    <th class="py-3">Date</th>
 
-                <button
-                    onclick="showHome()"
-                    class="border border-yellow-500 text-yellow-400 px-5 py-2 rounded-full hover:bg-yellow-500 hover:text-black transition">
+                    <th>OR No.</th>
 
-                    ← Back to Home
+                    <th class="text-right">Amount</th>
 
-                </button>
+                </tr>
 
-                <div class="text-center md:text-right">
+            </thead>
 
-                    <h1 id="memberName"
-                        class="title text-4xl md:text-5xl gold">
+            <tbody id="historyTable">
 
-                        Juan Dela Cruz
+                <tr>
 
-                    </h1>
+                    <td colspan="3" class="text-center text-gray-400 py-10">
 
-                    <p id="memberCode"
-                        class="text-gray-400 mt-2">
+                        No contribution records yet.
 
-                        ARISE-2026-0001
+                    </td>
 
-                    </p>
+                </tr>
 
-                </div>
+            </tbody>
 
-            </div>
+        </table>
 
-            <!-- Summary Cards -->
+    </div>
 
-            <div class="grid lg:grid-cols-3 gap-6">
+</div>
 
-                <div class="glass rounded-3xl p-8">
+</div>
 
-                    <p class="text-gray-400 mb-2">
+</section>
 
-                        Total Pledge
+<script>
 
-                    </p>
+const API_URL = "https://script.google.com/macros/s/AKfycbzZ2p0c_3pZ2sxyUfACpXZJVo83zPSPLvnceYl8V7VYTGfSqkp4zpomrRn_vkYUaiQy/exec";
 
-                    <h2 id="totalPledge"
-                        class="text-4xl font-bold gold">
+function peso(value){
 
-                        ₱500,000
+    return "₱" + Number(value).toLocaleString("en-PH",{
 
-                    </h2>
+        minimumFractionDigits:2,
 
-                </div>
+        maximumFractionDigits:2
 
-                <div class="glass rounded-3xl p-8">
+    });
 
-                    <p class="text-gray-400 mb-2">
+}
 
-                        Total Contributions
+function showLoading(){
 
-                    </p>
+    document.getElementById("loading").classList.remove("hidden");
 
-                    <h2 id="totalContribution"
-                        class="text-4xl font-bold text-green-400">
+}
 
-                        ₱175,000
+function hideLoading(){
 
-                    </h2>
+    document.getElementById("loading").classList.add("hidden");
 
-                </div>
+}
 
-                <div class="glass rounded-3xl p-8">
+/* =======================================
+   Animated Counter
+======================================= */
 
-                    <p class="text-gray-400 mb-2">
+function animateValue(id,end){
 
-                        Remaining Balance
+    const element=document.getElementById(id);
 
-                    </p>
+    let start=0;
 
-                    <h2 id="remainingBalance"
-                        class="text-4xl font-bold text-red-400">
+    const duration=1200;
 
-                        ₱325,000
+    const increment=end/(duration/20);
 
-                    </h2>
+    const timer=setInterval(()=>{
 
-                </div>
+        start+=increment;
 
-            </div>
+        if(start>=end){
 
-            <!-- Progress -->
+            start=end;
 
-            <div class="glass rounded-3xl p-8 mt-8">
-
-                <div class="flex justify-between mb-4">
-
-                    <span class="font-semibold">
-
-                        Pledge Progress
-
-                    </span>
-
-                    <span id="progressPercent"
-                        class="gold font-bold">
-
-                        35%
-
-                    </span>
-
-                </div>
-
-                <div class="w-full bg-gray-700 rounded-full h-5 overflow-hidden">
-
-                    <div id="progressBar"
-                        class="bg-gradient-to-r from-yellow-500 to-yellow-300 h-full rounded-full transition-all duration-1000"
-                        style="width:35%;">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <!-- Contribution History -->
-
-            <div class="glass rounded-3xl mt-8 overflow-hidden">
-
-                <div class="px-8 py-6 border-b border-white/10">
-
-                    <h2 class="title text-3xl gold">
-
-                        Contribution History
-
-                    </h2>
-
-                    <p class="text-gray-400 mt-2">
-
-                        Below are your recorded contributions.
-
-                    </p>
-
-                </div>
-
-                <div class="overflow-x-auto">
-
-                    <table class="w-full">
-
-                        <thead class="bg-white/5">
-
-                            <tr>
-
-                                <th class="text-left px-8 py-5">
-
-                                    Date
-
-                                </th>
-
-                                <th class="text-left px-8 py-5">
-
-                                    OR Number
-
-                                </th>
-
-                                <th class="text-right px-8 py-5">
-
-                                    Amount
-
-                                </th>
-
-                            </tr>
-
-                        </thead>
-
-                        <tbody id="historyTable">
-
-                            <!-- Sample Data -->
-
-                            <tr class="border-t border-white/5 hover:bg-white/5">
-
-                                <td class="px-8 py-5">
-
-                                    January 15, 2026
-
-                                </td>
-
-                                <td class="px-8 py-5">
-
-                                    OR-001
-
-                                </td>
-
-                                <td class="px-8 py-5 text-right">
-
-                                    ₱10,000
-
-                                </td>
-
-                            </tr>
-
-                            <tr class="border-t border-white/5 hover:bg-white/5">
-
-                                <td class="px-8 py-5">
-
-                                    February 15, 2026
-
-                                </td>
-
-                                <td class="px-8 py-5">
-
-                                    OR-010
-
-                                </td>
-
-                                <td class="px-8 py-5 text-right">
-
-                                    ₱10,000
-
-                                </td>
-
-                            </tr>
-
-                            <tr class="border-t border-white/5 hover:bg-white/5">
-
-                                <td class="px-8 py-5">
-
-                                    March 15, 2026
-
-                                </td>
-
-                                <td class="px-8 py-5">
-
-                                    OR-025
-
-                                </td>
-
-                                <td class="px-8 py-5 text-right">
-
-                                    ₱15,000
-
-                                </td>
-
-                            </tr>
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-            </div>
-
-            <!-- Last Updated -->
-
-            <div class="glass rounded-3xl p-6 mt-8 flex flex-col md:flex-row md:justify-between gap-4">
-
-                <div>
-
-                    <p class="text-gray-400">
-
-                        Last Updated
-
-                    </p>
-
-                    <h3 id="lastUpdated"
-                        class="font-semibold mt-2">
-
-                        July 15, 2026
-
-                    </h3>
-
-                </div>
-
-                <div class="text-right">
-
-                    <p class="text-gray-400">
-
-                        ARISE Code
-
-                    </p>
-
-                    <h3 id="dashboardCode"
-                        class="font-semibold mt-2">
-
-                        ARISE-2026-0001
-
-                    </h3>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- ==========================================
-        JAVASCRIPT
-    =========================================== -->
-
-    <script>
-
-        // ==========================================
-        // Create Floating Gold Particles
-        // ==========================================
-
-        const particleContainer = document.getElementById("particles");
-
-        for (let i = 0; i < 40; i++) {
-
-            const particle = document.createElement("div");
-
-            particle.classList.add("particle");
-
-            particle.style.width = Math.random() * 6 + 2 + "px";
-            particle.style.height = particle.style.width;
-
-            particle.style.left = Math.random() * 100 + "%";
-
-            particle.style.animationDuration = (10 + Math.random() * 15) + "s";
-            particle.style.animationDelay = Math.random() * 15 + "s";
-
-            particleContainer.appendChild(particle);
+            clearInterval(timer);
 
         }
 
-        // ==========================================
-        // Utility Functions
-        // ==========================================
+        if(id==="campaignMembers"){
 
-        function showLoading() {
+            element.textContent=Math.floor(start);
 
-            document.getElementById("loading").classList.remove("hidden");
+        }else{
 
-        }
-
-        function hideLoading() {
-
-            document.getElementById("loading").classList.add("hidden");
+            element.textContent=peso(start);
 
         }
 
-        function showDashboard() {
+    },20);
 
-            document.getElementById("home").classList.add("hidden");
+}
 
-            document.getElementById("dashboard").classList.remove("hidden");
+/* =======================================
+   Load Campaign Statistics
+======================================= */
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+async function loadCampaignStats(){
 
-        }
+    try{
 
-        function showHome() {
+        const response=await fetch(API_URL);
 
-            document.getElementById("dashboard").classList.add("hidden");
+        const data=await response.json();
 
-            document.getElementById("home").classList.remove("hidden");
+        if(!data.success)return;
 
-            document.getElementById("ariseCode").value = "";
+        animateValue("campaignPledged",data.campaign.totalPledged);
 
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
+        animateValue("campaignGoal",data.campaign.campaignGoal);
 
-        }
+        animateValue("campaignMembers",data.campaign.totalMembers);
 
-        // ==========================================
-        // Currency Formatter
-        // ==========================================
+        document.getElementById("campaignProgressText").textContent=
+            data.campaign.progress+"%";
 
-        function peso(amount) {
+        setTimeout(()=>{
 
-            return new Intl.NumberFormat("en-PH", {
+            document.getElementById("campaignProgressBar").style.width=
+            data.campaign.progress+"%";
 
-                style: "currency",
+        },500);
 
-                currency: "PHP",
+    }
 
-                minimumFractionDigits: 0
+    catch(e){
 
-            }).format(amount);
+        console.log(e);
 
-        }
+    }
 
-        // ==========================================
-        // Search Member
-        // (Temporary Demo)
-        // Replace with Google Apps Script in Step 8
-        // ==========================================
+}
+/* =======================================
+   Search Member
+======================================= */
 
-async function searchMember() {
+async function searchMember(){
 
-    const code = document
-        .getElementById("ariseCode")
-        .value
-        .trim();
+    const code=document.getElementById("ariseCode").value.trim();
 
-    if (!code) {
+    if(code===""){
 
-        alert("Please enter your ARISE Code.");
-
+        document.getElementById("errorModal").classList.remove("hidden");
         return;
 
     }
 
     showLoading();
 
-    const apiURL = "https://script.google.com/macros/s/AKfycbzZ2p0c_3pZ2sxyUfACpXZJVo83zPSPLvnceYl8V7VYTGfSqkp4zpomrRn_vkYUaiQy/exec";
+    try{
 
-    try {
+        const response=await fetch(API_URL+"?code="+encodeURIComponent(code));
 
-        const response = await fetch(apiURL + "?code=" + encodeURIComponent(code));
-
-        const data = await response.json();
+        const data=await response.json();
 
         hideLoading();
 
-        if (!data.success) {
+        if(!data.success){
 
-            alert(data.message);
-
+            document.getElementById("errorModal").classList.remove("hidden");
             return;
 
         }
 
-        const member = data.member;
+        showDashboard(data);
 
-        document.getElementById("memberName").textContent = member.name;
-        document.getElementById("memberCode").textContent = member.ariseCode;
-        document.getElementById("dashboardCode").textContent = member.ariseCode;
+    }
 
-        document.getElementById("totalPledge").textContent = peso(member.pledge);
-        document.getElementById("totalContribution").textContent = peso(member.contribution);
-        document.getElementById("remainingBalance").textContent = peso(member.balance);
-
-        document.getElementById("progressPercent").textContent = member.progress + "%";
-        document.getElementById("progressBar").style.width = member.progress + "%";
-
-        document.getElementById("lastUpdated").textContent = member.updated;
-
-        const tbody = document.getElementById("historyTable");
-
-        tbody.innerHTML = "";
-
-        data.history.forEach(item => {
-
-            tbody.innerHTML += `
-                <tr class="border-t border-white/5 hover:bg-white/5">
-                    <td class="px-8 py-5">${item.date}</td>
-                    <td class="px-8 py-5">${item.orNo}</td>
-                    <td class="px-8 py-5 text-right">${peso(item.amount)}</td>
-                </tr>
-            `;
-
-        });
-
-        showDashboard();
-
-    } catch (error) {
+    catch(err){
 
         hideLoading();
 
-        console.error(error);
+        console.error(err);
 
-        alert("Unable to connect to the server.");
+        document.getElementById("errorModal").classList.remove("hidden");
 
     }
 
 }
-    </script>
+
+/* =======================================
+   Display Dashboard
+======================================= */
+
+function showDashboard(data){
+
+    document.getElementById("home").classList.add("hidden");
+
+    document.getElementById("dashboard").classList.remove("hidden");
+
+    document.getElementById("memberName").textContent=data.member.name;
+
+    document.getElementById("memberCode").textContent=data.member.ariseCode;
+
+    document.getElementById("totalPledge").textContent=peso(data.member.pledge);
+
+    document.getElementById("totalContribution").textContent=peso(data.member.contribution);
+
+    document.getElementById("remainingBalance").textContent=peso(data.member.balance);
+
+    document.getElementById("progressPercent").textContent=data.member.progress+"%";
+
+    document.getElementById("progressBar").style.width=data.member.progress+"%";
+
+    document.getElementById("lastUpdated").textContent=data.member.updated;
+
+    loadContributionHistory(data.history);
+
+}
+
+/* =======================================
+   Contribution History
+======================================= */
+
+function loadContributionHistory(history){
+
+    const tbody=document.getElementById("historyTable");
+
+    tbody.innerHTML="";
+
+    if(history.length===0){
+
+        tbody.innerHTML=`
+
+        <tr>
+
+            <td colspan="3"
+
+            class="text-center py-8 text-gray-400">
+
+                No contribution records yet.
+
+            </td>
+
+        </tr>
+
+        `;
+
+        return;
+
+    }
+
+    history.forEach(item=>{
+
+        tbody.innerHTML+=`
+
+        <tr class="border-b border-gray-800 hover:bg-white/5">
+
+            <td class="py-4">${item.date}</td>
+
+            <td>${item.orNo}</td>
+
+            <td class="text-right">
+
+                ${peso(item.amount)}
+
+            </td>
+
+        </tr>
+
+        `;
+
+    });
+
+}
+
+/* =======================================
+   Return Home
+======================================= */
+
+function showHome(){
+
+    document.getElementById("dashboard").classList.add("hidden");
+
+    document.getElementById("home").classList.remove("hidden");
+
+    document.getElementById("ariseCode").value="";
+
+}
+
+/* =======================================
+   About Modal
+======================================= */
+
+function openAbout(){
+
+    document.getElementById("aboutModal").classList.remove("hidden");
+
+}
+
+function closeAbout(){
+
+    document.getElementById("aboutModal").classList.add("hidden");
+
+}
+
+/* =======================================
+   Help Modal
+======================================= */
+
+function openHelp(){
+
+    document.getElementById("helpModal").classList.remove("hidden");
+
+}
+
+function closeHelp(){
+
+    document.getElementById("helpModal").classList.add("hidden");
+
+}
+
+/* =======================================
+   Error Modal
+======================================= */
+
+function closeError(){
+
+    document.getElementById("errorModal").classList.add("hidden");
+
+}
+
+/* =======================================
+   ESC closes modals
+======================================= */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+
+        closeAbout();
+
+        closeHelp();
+
+        closeError();
+
+    }
+
+});
+
+/* =======================================
+   Floating Gold Particles
+======================================= */
+
+function createParticles(){
+
+    const container=document.getElementById("particles");
+
+    for(let i=0;i<25;i++){
+
+        const p=document.createElement("div");
+
+        p.className="particle";
+
+        const size=Math.random()*6+3;
+
+        p.style.width=size+"px";
+
+        p.style.height=size+"px";
+
+        p.style.left=Math.random()*100+"%";
+
+        p.style.animationDuration=(10+Math.random()*12)+"s";
+
+        p.style.animationDelay=(Math.random()*8)+"s";
+
+        container.appendChild(p);
+
+    }
+
+}
+
+/* =======================================
+   Page Loaded
+======================================= */
+
+window.onload=function(){
+
+    createParticles();
+
+    loadCampaignStats();
+
+};
+
+</script>
 
 </body>
 
