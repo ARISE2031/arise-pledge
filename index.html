@@ -958,7 +958,7 @@ CONTRIBUTION HISTORY
 
 <script>
 
-const API_URL = "https://script.google.com/macros/s/AKfycbzZ2p0c_3pZ2sxyUfACpXZJVo83zPSPLvnceYl8V7VYTGfSqkp4zpomrRn_vkYUaiQy/exec?code=ARISE-0001";
+const API_URL = "https://script.google.com/macros/s/AKfycbzZ2p0c_3pZ2sxyUfACpXZJVo83zPSPLvnceYl8V7VYTGfSqkp4zpomrRn_vkYUaiQy/exec";
 
 function peso(value){
 
@@ -1032,33 +1032,37 @@ async function loadCampaignStats(){
 
     try{
 
-        const response=await fetch(API_URL);
+        // Call the CAMPAIGN endpoint
+        const response = await fetch("https://script.google.com/macros/s/AKfycbzZ2p0c_3pZ2sxyUfACpXZJVo83zPSPLvnceYl8V7VYTGfSqkp4zpomrRn_vkYUaiQy/exec?action=campaign");
 
-        const data=await response.json();
+        const data = await response.json();
 
-        if(!data.success)return;
+        if(!data.success) return;
 
-        animateValue("campaignPledged",data.campaign.totalPledged);
+        // NEW field names from the updated Apps Script
+        animateValue("campaignPledged", data.campaign.pledged);
 
-        animateValue("campaignGoal",data.campaign.campaignGoal);
+        animateValue("campaignGoal", data.campaign.goal);
 
-        animateValue("campaignMembers",data.campaign.totalMembers);
+        animateValue("campaignMembers", data.campaign.families);
 
-        document.getElementById("campaignProgressText").textContent=
-            data.campaign.progress+"%";
+        // Progress %
+        document.getElementById("campaignProgressText").textContent =
+            data.campaign.progress + "%";
 
-        setTimeout(()=>{
+        // Animate progress bar
+        setTimeout(() => {
 
-            document.getElementById("campaignProgressBar").style.width=
-            data.campaign.progress+"%";
+            document.getElementById("campaignProgressBar").style.width =
+                data.campaign.progress + "%";
 
-        },500);
+        }, 500);
 
     }
 
     catch(e){
 
-        console.log(e);
+        console.log("Campaign stats error:", e);
 
     }
 
