@@ -401,6 +401,25 @@ placeholder="e.g. ARISE-2026-0001"
 
 class="input-box w-full rounded-full h-16 px-8 text-center text-black text-lg">
 
+<div class="relative mt-4">
+
+    <input
+        id="memberPassword"
+        type="password"
+        placeholder="Enter your password"
+        class="input-box w-full rounded-full h-16 px-8 pr-16 text-center text-black text-lg">
+
+    <button
+        type="button"
+        onclick="togglePassword()"
+        class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-500 hover:text-yellow-500"
+        aria-label="Show or hide password"
+    >
+        👁
+    </button>
+
+</div>
+
 <button
 
 onclick="searchMember()"
@@ -662,7 +681,9 @@ Need Help?
 
 <p class="text-gray-300 leading-8">
 
-If you cannot access your pledge information or forgot your ARISE Code, kindly contact the church office.
+    If you cannot access your pledge information,
+    forgot your ARISE Code, or forgot your password,
+    kindly contact the church office.
 
 </p>
 
@@ -711,15 +732,18 @@ class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center 
 
 <h2 class="title text-3xl gold mb-4">
 
-Member Not Found
+    Unable to Sign In
 
 </h2>
 
 <p class="text-gray-300 leading-8">
 
-We couldn't find an ARISE Code matching your entry.
+    Invalid ARISE Code or Password.
 
-Please verify the code or contact the church office.
+    <br><br>
+
+    Please check your login details or contact
+    the church office for assistance.
 
 </p>
 
@@ -1037,6 +1061,9 @@ async function loadCampaignStats(){
 
         const data = await response.json();
 
+        console.log("MEMBER LOGIN RESPONSE:", data);
+        console.log("MEMBER HISTORY:", data.history);
+
         if(!data.success) return;
 
         // NEW field names from the updated Apps Script
@@ -1068,48 +1095,108 @@ async function loadCampaignStats(){
 
 }
 /* =======================================
-   Search Member
+   Member Login
 ======================================= */
 
 async function searchMember(){
 
-    const code=document.getElementById("ariseCode").value.trim();
+    const code =
+        document.getElementById("ariseCode")
+        .value
+        .trim();
 
-    if(code===""){
+    const password =
+        document.getElementById("memberPassword")
+        .value;
 
-        document.getElementById("errorModal").classList.remove("hidden");
+
+    if(code === "" || password === ""){
+
+        document.getElementById("errorModal")
+            .classList.remove("hidden");
+
         return;
 
     }
 
+
     showLoading();
+
 
     try{
 
-        const response=await fetch(API_URL+"?code="+encodeURIComponent(code));
+        const loginUrl =
+            API_URL +
+            "?action=memberLogin" +
+            "&code=" +
+            encodeURIComponent(code) +
+            "&password=" +
+            encodeURIComponent(password);
 
-        const data=await response.json();
+
+        const response =
+            await fetch(loginUrl);
+
+
+        const data =
+            await response.json();
+
 
         hideLoading();
 
+
         if(!data.success){
 
-            document.getElementById("errorModal").classList.remove("hidden");
+            document.getElementById("errorModal")
+                .classList.remove("hidden");
+
             return;
 
         }
+
 
         showDashboard(data);
 
     }
 
+
     catch(err){
 
         hideLoading();
 
-        console.error(err);
+        console.error(
+            "Member Login Error:",
+            err
+        );
 
-        document.getElementById("errorModal").classList.remove("hidden");
+
+        document.getElementById("errorModal")
+            .classList.remove("hidden");
+
+    }
+
+}
+
+/* =======================================
+   Show / Hide Password
+======================================= */
+
+function togglePassword(){
+
+    const password =
+        document.getElementById(
+            "memberPassword"
+        );
+
+
+    if(password.type === "password"){
+
+        password.type = "text";
+
+    }
+    else{
+
+        password.type = "password";
 
     }
 
@@ -1151,50 +1238,128 @@ function showDashboard(data){
 
 function loadContributionHistory(history){
 
-    const tbody=document.getElementById("historyTable");
+    const tbody = document.getElementById("historyTable");
 
-    tbody.innerHTML="";
+    tbody.innerHTML = "";
 
-    if(history.length===0){
+    if(!Array.isArray(history) || history.length === 0){
 
-        tbody.innerHTML=`
-
-        <tr>
-
-            <td colspan="3"
-
-            class="text-center py-8 text-gray-400">
-
-                No contribution records yet.
-
-            </td>
-
-        </tr>
-
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="3"
+                    class="text-center py-8 text-gray-400">
+                    No contribution records yet.
+                </td>
+            </tr>
         `;
 
         return;
-
     }
 
-    history.forEach(item=>{
+    history.forEach(item => {
 
-        tbody.innerHTML+=`
+        /*
+         * Support several possible field names
+         * returned by the existing backend.
+         */
 
-        <tr class="border-b border-gray-800 hover:bg-white/5">
+        let date =
+            item.date ??
+            item.Date ??
+            item.contributionDate ??
+            item.transactionDate ??
+            "";
 
-            <td class="py-4">${item.date}</td>
+        let orNo =
+            item.orNo ??
+            item.ORNo ??
+            item.orNumber ??
+            item.ORNumber ??
+            item["OR No."] ??
+            item["OR NO"] ??
+            "";
 
-            <td>${item.orNo}</td>
+        let amount =
+            item.amount ??
+            item.Amount ??
+            item.contribution ??
+            item.Contribution ??
+            0;
 
-            <td class="text-right">
 
-                ${peso(item.amount)}
+        /*
+         * If the backend returns an ARRAY instead
+         * of an object, handle that too.
+         */
 
-            </td>
+        if(Array.isArray(item)){
 
-        </tr>
+            date = item[0] ?? "";
+            orNo = item[1] ?? "";
+            amount = item[2] ?? 0;
 
+        }
+
+
+        /*
+         * Format date safely.
+         */
+
+        let displayDate = "--";
+
+        if(date){
+
+            const parsedDate = new Date(date);
+
+            if(!isNaN(parsedDate.getTime())){
+
+                displayDate = parsedDate.toLocaleDateString(
+                    "en-PH",
+                    {
+                        year: "numeric",
+                        month: "short",
+                        day: "2-digit"
+                    }
+                );
+
+            }
+            else{
+
+                displayDate = String(date);
+
+            }
+
+        }
+
+
+        /*
+         * Convert amount safely.
+         */
+
+        const numericAmount =
+            Number(
+                String(amount)
+                    .replace(/₱/g,"")
+                    .replace(/,/g,"")
+            ) || 0;
+
+
+        tbody.innerHTML += `
+            <tr class="border-b border-gray-800 hover:bg-white/5">
+
+                <td class="py-4">
+                    ${displayDate}
+                </td>
+
+                <td>
+                    ${orNo || "--"}
+                </td>
+
+                <td class="text-right">
+                    ${peso(numericAmount)}
+                </td>
+
+            </tr>
         `;
 
     });
