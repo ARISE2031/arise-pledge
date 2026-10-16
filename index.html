@@ -430,6 +430,14 @@ VIEW MY CONTRIBUTIONS
 
 </button>
 
+<button
+    type="button"
+    onclick="openResetPassword()"
+    class="w-full mt-4 py-3 text-yellow-400 hover:text-yellow-300 transition underline underline-offset-4">
+    Forgot Password?
+</button>
+
+
 <p class="mt-5 text-gray-400 text-sm">
 
 🔒 Your information is safe and secure.
@@ -718,6 +726,112 @@ Monday – Friday
 <!-- ==========================================
 MEMBER NOT FOUND MODAL
 ========================================== -->
+
+
+<!-- ======================================
+MEMBER PASSWORD RESET MODAL
+====================================== -->
+
+<div id="resetPasswordModal"
+     class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6 overflow-y-auto">
+
+    <div class="glass modal max-w-md w-full rounded-3xl p-8 my-auto">
+
+        <button
+            type="button"
+            onclick="closeResetPassword()"
+            class="float-right text-3xl hover:text-yellow-400"
+            aria-label="Close">
+            &times;
+        </button>
+
+        <h2 class="title text-3xl gold mb-3">
+            Reset Password
+        </h2>
+
+        <p class="text-gray-400 text-sm leading-6 mb-6">
+            Enter your ARISE Code and the one-time recovery code
+            provided by the church office.
+        </p>
+
+        <form id="resetPasswordForm">
+
+            <label for="resetAriseCode"
+                   class="block text-gray-300 text-sm mb-2">
+                ARISE Code
+            </label>
+
+            <input
+                id="resetAriseCode"
+                type="text"
+                required
+                autocomplete="username"
+                placeholder="e.g. ARISE-2026-0001"
+                class="input-box w-full rounded-xl h-12 px-4 text-black mb-4">
+
+            <label for="recoveryCode"
+                   class="block text-gray-300 text-sm mb-2">
+                One-Time Recovery Code
+            </label>
+
+            <input
+                id="recoveryCode"
+                type="text"
+                required
+                autocomplete="one-time-code"
+                placeholder="Enter recovery code"
+                class="input-box w-full rounded-xl h-12 px-4 text-black mb-4">
+
+            <label for="newMemberPassword"
+                   class="block text-gray-300 text-sm mb-2">
+                New Password
+            </label>
+
+            <input
+                id="newMemberPassword"
+                type="password"
+                required
+                minlength="12"
+                autocomplete="new-password"
+                placeholder="At least 12 characters"
+                class="input-box w-full rounded-xl h-12 px-4 text-black mb-4">
+
+            <label for="confirmMemberPassword"
+                   class="block text-gray-300 text-sm mb-2">
+                Confirm New Password
+            </label>
+
+            <input
+                id="confirmMemberPassword"
+                type="password"
+                required
+                minlength="12"
+                autocomplete="new-password"
+                placeholder="Re-enter new password"
+                class="input-box w-full rounded-xl h-12 px-4 text-black mb-4">
+
+            <p id="resetPasswordMessage"
+               class="hidden text-sm leading-6 mb-4"
+               role="status"
+               aria-live="polite"></p>
+
+            <button
+                id="resetPasswordSubmit"
+                type="submit"
+                class="btn-gold w-full rounded-full py-4 mt-2">
+                RESET MY PASSWORD
+            </button>
+
+            <button
+                type="button"
+                onclick="closeResetPassword()"
+                class="w-full py-3 mt-3 text-gray-400 hover:text-white">
+                Cancel
+            </button>
+
+        </form>
+    </div>
+</div>
 
 <div id="errorModal"
 class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-6">
@@ -1379,6 +1493,126 @@ function showHome(){
     document.getElementById("ariseCode").value="";
 
 }
+
+
+/* =======================================
+   MEMBER PASSWORD RESET
+======================================= */
+
+function openResetPassword() {
+    document.getElementById("resetPasswordModal")
+        .classList.remove("hidden");
+
+    // Carry the ARISE Code over from the login form.
+    document.getElementById("resetAriseCode").value =
+        document.getElementById("ariseCode").value.trim();
+
+    document.getElementById("resetPasswordMessage").classList.add("hidden");
+}
+
+function closeResetPassword() {
+    document.getElementById("resetPasswordModal")
+        .classList.add("hidden");
+}
+
+function showResetPasswordMessage(message, success = false) {
+    const element = document.getElementById("resetPasswordMessage");
+
+    element.textContent = message;
+    element.classList.remove("hidden", "text-green-400", "text-red-400");
+    element.classList.add(success ? "text-green-400" : "text-red-400");
+}
+
+document.getElementById("resetPasswordForm")
+    .addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+        const code = document.getElementById("resetAriseCode")
+            .value.trim();
+
+        const recoveryCode = document.getElementById("recoveryCode")
+            .value.trim();
+
+        const newPassword = document.getElementById("newMemberPassword")
+            .value;
+
+        const confirmPassword = document.getElementById("confirmMemberPassword")
+            .value;
+
+        const submitButton = document.getElementById("resetPasswordSubmit");
+
+        if (!code || !recoveryCode || !newPassword || !confirmPassword) {
+            showResetPasswordMessage("Please complete all fields.");
+            return;
+        }
+
+        if (newPassword.length < 12) {
+            showResetPasswordMessage(
+                "Your new password must be at least 12 characters long."
+            );
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            showResetPasswordMessage("The passwords do not match.");
+            return;
+        }
+
+        submitButton.disabled = true;
+        submitButton.textContent = "RESETTING PASSWORD...";
+
+        try {
+            const response = await fetch(API_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain;charset=UTF-8"
+                },
+                body: JSON.stringify({
+                    action: "resetMemberPasswordWithRecovery",
+                    code: code,
+                    recoveryCode: recoveryCode,
+                    newPassword: newPassword
+                })
+            });
+
+            const data = await response.json();
+
+            if (!data.success) {
+                showResetPasswordMessage(
+                    data.message || "Unable to reset your password."
+                );
+                return;
+            }
+
+            showResetPasswordMessage(
+                "Your password has been reset. You can now sign in with your new password.",
+                true
+            );
+
+            document.getElementById("memberPassword").value = "";
+            document.getElementById("newMemberPassword").value = "";
+            document.getElementById("confirmMemberPassword").value = "";
+            document.getElementById("recoveryCode").value = "";
+
+            // Return to the login form after a short pause.
+            setTimeout(function() {
+                closeResetPassword();
+                document.getElementById("ariseCode").value = code;
+                document.getElementById("memberPassword").focus();
+            }, 2500);
+
+        } catch (error) {
+            console.error("Member password reset error:", error);
+
+            showResetPasswordMessage(
+                "The reset request could not be completed. Please try again or contact the church office."
+            );
+        } finally {
+            submitButton.disabled = false;
+            submitButton.textContent = "RESET MY PASSWORD";
+        }
+    });
 
 /* =======================================
    About Modal
