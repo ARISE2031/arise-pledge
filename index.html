@@ -1209,41 +1209,54 @@ function hideLoading(){
    Animated Counter
 ======================================= */
 
-function animateValue(id,end){
+function formatCompactPeso(value) {
+    const amount = Number(value) || 0;
 
-    const element=document.getElementById(id);
+    if (amount >= 1000000) {
+        return "₱" + (amount / 1000000).toFixed(2) + "M";
+    }
 
-    let start=0;
+    if (amount >= 1000) {
+        return "₱" + (amount / 1000).toFixed(2) + "K";
+    }
 
-    const duration=1200;
-
-    const increment=end/(duration/20);
-
-    const timer=setInterval(()=>{
-
-        start+=increment;
-
-        if(start>=end){
-
-            start=end;
-
-            clearInterval(timer);
-
-        }
-
-        if(id==="campaignMembers"){
-
-            element.textContent=Math.floor(start);
-
-        }else{
-
-            element.textContent=peso(start);
-
-        }
-
-    },20);
-
+    return peso(amount);
 }
+
+function animateValue(id, end) {
+    const element = document.getElementById(id);
+    if (!element) return;
+
+    const target = Number(end) || 0;
+    const duration = 1200;
+    const startTime = performance.now();
+
+    function update(currentTime) {
+        const progress = Math.min(
+            (currentTime - startTime) / duration,
+            1
+        );
+
+        const value = target * progress;
+
+        if (id === "campaignMembers") {
+            element.textContent = Math.floor(value).toLocaleString("en-PH");
+        } else {
+            element.textContent = formatCompactPeso(value);
+        }
+
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        } else if (id === "campaignMembers") {
+            element.textContent = Math.floor(target).toLocaleString("en-PH");
+        } else {
+            element.textContent = formatCompactPeso(target);
+        }
+    }
+
+    requestAnimationFrame(update);
+}
+
 
 /* =======================================
    Load Campaign Statistics
