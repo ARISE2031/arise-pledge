@@ -370,6 +370,28 @@ animation:fadeUp .35s ease;
     }
 }
 
+/* Keep ARISE campaign amounts on a single line */
+.stat-value {
+    font-size: clamp(1rem, 1.6vw, 1.8rem);
+    line-height: 1.25;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.5px;
+}
+
+/* Keep member dashboard amounts on a single line */
+#totalPledge,
+#totalContribution,
+#remainingBalance {
+    font-size: clamp(1rem, 1.6vw, 2rem);
+    line-height: 1.3;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    letter-spacing: -0.5px;
+}
+
 </style>
 
 </head>
