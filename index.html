@@ -1211,6 +1211,16 @@ async function loadCampaignStats(){
 
         animateValue("campaignMembers", data.campaign.families);
 
+        // MP2 cumulative deposits
+        animateValue(
+            "campaignMp2",
+            Number(data.campaign.mp2TotalDeposited) || 0
+        );
+
+        document.getElementById("campaignMp2Updated").textContent =
+            "Last updated: " +
+            (data.campaign.mp2LastUpdated || "Not yet updated");
+        
         // Progress %
         document.getElementById("campaignProgressText").textContent =
             data.campaign.progress + "%";
